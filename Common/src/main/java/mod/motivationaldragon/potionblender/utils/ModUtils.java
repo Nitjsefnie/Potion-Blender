@@ -5,7 +5,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class ModUtils {
 
-    ModUtils(){
+    ModUtils() {
         throw new IllegalStateException("Utility class");
     }
 

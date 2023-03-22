@@ -11,23 +11,24 @@ import net.fabricmc.fabric.api.rendering.data.v1.RenderAttachedBlockView;
 @Environment(EnvType.CLIENT)
 public class ModColorProvider {
 
-    ModColorProvider(){
+    ModColorProvider() {
         throw new IllegalStateException("Utility class");
     }
-    public static void registerColorProvider(){
+
+    public static void registerColorProvider() {
 
         //Cauldron water color
-        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) ->{
+        ColorProviderRegistry.BLOCK.register((state, view, pos, tintIndex) -> {
             assert view != null;
-            if(view instanceof RenderAttachedBlockView renderAttachedBlockView){
-                Object data =  renderAttachedBlockView.getBlockEntityRenderAttachment(pos);
+            if (view instanceof RenderAttachedBlockView renderAttachedBlockView) {
+                Object data = renderAttachedBlockView.getBlockEntityRenderAttachment(pos);
 
-                if(data != null){
+                if (data != null) {
                     return (int) data;
                 }
             }
             return 3694022; // hex color code for water
-            }, ModBlock.BREWING_CAULDRON_BLOCK);
+        }, ModBlock.BREWING_CAULDRON_BLOCK);
 
         //Potion colors
         ColorProviderRegistry.ITEM.register(CommonItemColors::handlePotionColor, ModItem.COMBINED_POTION);

@@ -11,7 +11,8 @@ import java.nio.file.Path;
 
 public class ModConfig {
 
-    private ModConfig(){}
+    private ModConfig() {
+    }
 
     private static final String CONFIG_FILE_NAME = "potion_blender_config.json";
     private static final Path CONFIG_PATH = Path.of(Constants.MOD_ID, CONFIG_FILE_NAME);
@@ -26,13 +27,15 @@ public class ModConfig {
         readConfig();
     }
 
-    public static ConfigInstance getConfig(){
+    public static ConfigInstance getConfig() {
         return config;
     }
 
-    private static void readConfig(){
+    private static void readConfig() {
 
-        if(!isReady){init();}
+        if (!isReady) {
+            init();
+        }
 
         try {
             String jsonString = Files.readString(CONFIG_PATH);
@@ -50,11 +53,13 @@ public class ModConfig {
 
     public static void init() {
 
-        if(isReady){return;}
+        if (isReady) {
+            return;
+        }
         isReady = true;
 
         Path configPath = Path.of(Constants.MOD_ID, CONFIG_FILE_NAME);
-        if(!Files.exists(configPath)){
+        if (!Files.exists(configPath)) {
             try {
                 Path path = Path.of(Constants.MOD_ID);
                 Constants.LOG.info("No config file found, creating a new one at: %s...".formatted(path));
@@ -66,7 +71,7 @@ public class ModConfig {
                 Files.createFile(configPath);
                 Files.writeString(configPath, jsonString);
 
-            }catch (IOException e){
+            } catch (IOException e) {
                 Constants.LOG.error("Could not access config file");
                 e.printStackTrace();
             }
@@ -74,10 +79,10 @@ public class ModConfig {
     }
 
 
-    public static ConfigInstance deserializeConfig(String configAsJson){
+    public static ConfigInstance deserializeConfig(String configAsJson) {
         try {
             return JSON_PARSER.fromJson(configAsJson, ConfigInstance.class);
-        }catch (JsonSyntaxException e){
+        } catch (JsonSyntaxException e) {
             Constants.LOG.error("Could not parse config JSON. Make sure syntax is correct");
             e.printStackTrace();
         }
@@ -85,7 +90,7 @@ public class ModConfig {
         return new ConfigInstance();
     }
 
-    public static String serializeConfig(ConfigInstance config){
+    public static String serializeConfig(ConfigInstance config) {
         return JSON_PARSER.toJson(config);
     }
 
