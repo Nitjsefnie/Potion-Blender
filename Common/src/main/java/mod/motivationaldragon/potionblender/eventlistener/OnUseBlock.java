@@ -15,16 +15,20 @@ public class OnUseBlock {
 
     //Event handler responsible for placing a cauldron when a campfire is clicked with a cauldron in hand
     public static InteractionResult onBlockRightClick(Player player, Level world, BlockPos hitLocation) {
-        if (world.isClientSide() || player.isSpectator()) {return InteractionResult.PASS;}
+        if (world.isClientSide() || player.isSpectator()) {
+            return InteractionResult.PASS;
+        }
 
         BlockState blockState = world.getBlockState(new BlockPos(hitLocation));
 
-        for (ItemStack itemStack:player.getHandSlots()) {
+        for (ItemStack itemStack : player.getHandSlots()) {
             if (itemStack.getItem() == Items.CAULDRON && !world.isEmptyBlock(hitLocation) && blockState.getBlock() == Blocks.CAMPFIRE) {
-                if(!player.isCreative()) {itemStack.shrink(1);}
+                if (!player.isCreative()) {
+                    itemStack.shrink(1);
+                }
 
                 world.removeBlock(hitLocation, false);
-                Block.updateOrDestroy(blockState, ModBlock.BREWING_CAULDRON_BLOCK.defaultBlockState(), world, hitLocation,0);
+                Block.updateOrDestroy(blockState, ModBlock.BREWING_CAULDRON_BLOCK.defaultBlockState(), world, hitLocation, 0);
                 return InteractionResult.CONSUME;
             }
         }

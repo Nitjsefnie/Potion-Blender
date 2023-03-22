@@ -25,7 +25,9 @@ public class FabricBrewingCauldronBlockEntity extends BrewingCauldronBlockEntity
 
         assert this.getLevel() != null;
 
-        if(this.getLevel().isClientSide()) {return;}
+        if (this.getLevel().isClientSide()) {
+            return;
+        }
 
         FriendlyByteBuf data = PacketByteBufs.create();
         data.writeInt(this.size());
@@ -41,6 +43,7 @@ public class FabricBrewingCauldronBlockEntity extends BrewingCauldronBlockEntity
 
     /**
      * FabricPlatformHelper specific code used to by the render thread to get block entity data for rendering
+     *
      * @return An Integer representing the water color of the cauldron
      */
     public @Nullable Object getRenderAttachmentData() {

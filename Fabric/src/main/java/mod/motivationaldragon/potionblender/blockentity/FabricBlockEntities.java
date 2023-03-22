@@ -18,7 +18,7 @@ public class FabricBlockEntities {
     /**
      * Ensure constant initialisation during mod initialisation
      */
-    public static void init(){
+    public static void init() {
         Constants.LOG.debug("BlockEntities loaded!");
     }
 

@@ -42,7 +42,7 @@ public class BrewingCauldron extends Block implements EntityBlock {
 
     @Override
     protected void createBlockStateDefinition(StateDefinition.@NotNull Builder<Block, BlockState> builder) {
-        builder.add(HAS_FLUID,FACING);
+        builder.add(HAS_FLUID, FACING);
         builder.add(REDRAW_DUMMY);
     }
 
@@ -51,8 +51,8 @@ public class BrewingCauldron extends Block implements EntityBlock {
     @NotNull
     public InteractionResult use(@NotNull BlockState state, Level world, @NotNull BlockPos pos, @NotNull Player player, @NotNull InteractionHand hand, @NotNull BlockHitResult hit) {
         if (!world.isClientSide()) {
-            BrewingCauldronBlockEntity brewingCauldronBlockEntity = tryGetBlockEntity(world,pos);
-            if(brewingCauldronBlockEntity != null) {
+            BrewingCauldronBlockEntity brewingCauldronBlockEntity = tryGetBlockEntity(world, pos);
+            if (brewingCauldronBlockEntity != null) {
                 brewingCauldronBlockEntity.onUseDelegate(state, world, pos, player);
             }
         }
@@ -61,7 +61,7 @@ public class BrewingCauldron extends Block implements EntityBlock {
 
     @Override
     @NotNull
-    public BlockState getStateForPlacement( BlockPlaceContext ctx) {
+    public BlockState getStateForPlacement(BlockPlaceContext ctx) {
         return this.defaultBlockState().setValue(FACING, ctx.getHorizontalDirection().getOpposite());
     }
 
@@ -110,9 +110,9 @@ public class BrewingCauldron extends Block implements EntityBlock {
     @Override
     public void fallOn(@NotNull Level world, @NotNull BlockState blockState, @NotNull BlockPos pos, Entity entity, float speed) {
 
-        BrewingCauldronBlockEntity brewingCauldronBlockEntity = tryGetBlockEntity(entity.getLevel(),entity.blockPosition().below());
-        if(brewingCauldronBlockEntity != null && !entity.getLevel().isClientSide()) {
-                brewingCauldronBlockEntity.onEntityLandDelegate(entity);
+        BrewingCauldronBlockEntity brewingCauldronBlockEntity = tryGetBlockEntity(entity.getLevel(), entity.blockPosition().below());
+        if (brewingCauldronBlockEntity != null && !entity.getLevel().isClientSide()) {
+            brewingCauldronBlockEntity.onEntityLandDelegate(entity);
         }
         super.fallOn(world, blockState, pos, entity, speed);
     }
@@ -120,12 +120,13 @@ public class BrewingCauldron extends Block implements EntityBlock {
 
     /**
      * Helper for getting the block entity {@link BrewingCauldronBlockEntity} associated with this {@link BrewingCauldron}
+     *
      * @param world the world this block is in
-     * @param pos the pos the {@link BrewingCauldronBlockEntity}. Should be the same as the block
+     * @param pos   the pos the {@link BrewingCauldronBlockEntity}. Should be the same as the block
      * @return the {@link BlockEntity} attached to this {@link BrewingCauldron}
      */
     @Nullable
-    private BrewingCauldronBlockEntity tryGetBlockEntity(Level world, BlockPos pos){
+    private BrewingCauldronBlockEntity tryGetBlockEntity(Level world, BlockPos pos) {
         BlockEntity blockEntity = world.getBlockEntity(pos);
         return blockEntity instanceof BrewingCauldronBlockEntity alchemyMixerBlockEntity ? alchemyMixerBlockEntity : null;
 
@@ -134,7 +135,7 @@ public class BrewingCauldron extends Block implements EntityBlock {
     @Nullable
     @Override
     public BlockEntity newBlockEntity(@NotNull BlockPos pos, @NotNull BlockState state) {
-        return Service.PLATFORM.createPlatformBrewingCauldronBlockEntity(pos,state);
+        return Service.PLATFORM.createPlatformBrewingCauldronBlockEntity(pos, state);
     }
 
 }

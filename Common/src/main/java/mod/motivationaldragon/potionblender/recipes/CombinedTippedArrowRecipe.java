@@ -34,10 +34,11 @@ public class CombinedTippedArrowRecipe extends CustomRecipe {
                 ItemStack itemStack = craftingInventory.getItem(i + j * craftingInventory.getWidth());
 
                 if (i == 1 && j == 1) {
-                    if(!itemStack.is(ModItem.COMBINED_LINGERING_POTION)){
+                    if (!itemStack.is(ModItem.COMBINED_LINGERING_POTION)) {
                         return false;
                     }
-                } else if (itemStack.isEmpty() || !itemStack.is(Items.ARROW)) {
+                }
+                else if (itemStack.isEmpty() || !itemStack.is(Items.ARROW)) {
                     return false;
                 }
             }
@@ -56,18 +57,18 @@ public class CombinedTippedArrowRecipe extends CustomRecipe {
 
         List<MobEffectInstance> statusEffectInstances = new ArrayList<>(3); //Capacity = max number combined effects
         for (MobEffectInstance effectInstance : PotionUtils.getCustomEffects(potionItemStack)) {
-                //The duration of the effect is 1⁄8 that of the corresponding potion.
-                //Since we already divided by 4 when making the lingering potion we only need to divide by 2.
-                statusEffectInstances.add(new MobEffectInstance(effectInstance.getEffect(), effectInstance.getDuration() / 2,
-                        effectInstance.getAmplifier()));
+            //The duration of the effect is 1⁄8 that of the corresponding potion.
+            //Since we already divided by 4 when making the lingering potion we only need to divide by 2.
+            statusEffectInstances.add(new MobEffectInstance(effectInstance.getEffect(), effectInstance.getDuration() / 2,
+                    effectInstance.getAmplifier()));
         }
 
-        PotionUtils.setCustomEffects(craftedItemStack,statusEffectInstances);
+        PotionUtils.setCustomEffects(craftedItemStack, statusEffectInstances);
 
         assert craftedItemStack.getTag() != null;
 
-        craftedItemStack.getTag().putBoolean(ModNBTKey.FORCE_COLOR_RENDERING_KEY,true);
-        craftedItemStack.getTag().putBoolean(ModNBTKey.IS_TIPPED_ARROW_COMBINED_KEY,true);
+        craftedItemStack.getTag().putBoolean(ModNBTKey.FORCE_COLOR_RENDERING_KEY, true);
+        craftedItemStack.getTag().putBoolean(ModNBTKey.IS_TIPPED_ARROW_COMBINED_KEY, true);
 
         return craftedItemStack;
     }
@@ -76,6 +77,9 @@ public class CombinedTippedArrowRecipe extends CustomRecipe {
     public boolean canCraftInDimensions(int width, int height) {
         return width >= 2 && height >= 2;
     }
+
     @Override
-    public @NotNull RecipeSerializer<?> getSerializer() {return ModSpecialRecipeSerializer.COMBINED_TIPPED_ARROW;}
+    public @NotNull RecipeSerializer<?> getSerializer() {
+        return ModSpecialRecipeSerializer.COMBINED_TIPPED_ARROW;
+    }
 }

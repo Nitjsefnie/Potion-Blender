@@ -14,8 +14,8 @@ import org.jetbrains.annotations.NotNull;
 public class CombinedPotionItem extends PotionItem {
 
     public CombinedPotionItem(Item.Properties settings) {
-            super(settings);
-        }
+        super(settings);
+    }
 
     @Override
     public @NotNull String getDescriptionId(@NotNull ItemStack stack) {

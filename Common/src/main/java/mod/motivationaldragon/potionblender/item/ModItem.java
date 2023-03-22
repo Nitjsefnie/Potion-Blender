@@ -10,7 +10,7 @@ import java.util.function.Consumer;
 
 public class ModItem {
 
-    private ModItem(){
+    private ModItem() {
         throw new IllegalStateException("Utility class");
     }
 
@@ -26,14 +26,14 @@ public class ModItem {
             new Item.Properties().stacksTo(1));
 
 
-    public static void register(BiConsumer<Item, ResourceLocation> r){
+    public static void register(BiConsumer<Item, ResourceLocation> r) {
         r.accept(COMBINED_POTION, new ResourceLocation(Constants.MOD_ID, "combined_potion"));
         r.accept(COMBINED_SPLASH_POTION, new ResourceLocation(Constants.MOD_ID, "splash_combined_potion"));
         r.accept(COMBINED_LINGERING_POTION, new ResourceLocation(Constants.MOD_ID, "lingering_combined_potion"));
         Constants.LOG.debug("Registered Items!");
     }
 
-    public static void registerFunctionalBlocksItems(Consumer<Item> r){
+    public static void registerFunctionalBlocksItems(Consumer<Item> r) {
         r.accept(ModBlock.BREWING_CAULDRON_ITEM);
     }
 

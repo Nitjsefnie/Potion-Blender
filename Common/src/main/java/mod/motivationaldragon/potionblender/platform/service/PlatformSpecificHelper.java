@@ -18,6 +18,7 @@ public abstract class PlatformSpecificHelper {
     private final BiFunction<BlockPos, BlockState, BlockEntity> brewingCauldronConstructor;
 
     public abstract boolean isFabric();
+
     public abstract boolean isForge();
 
     protected PlatformSpecificHelper(BlockEntityType<? extends BrewingCauldronBlockEntity> brewingCauldron, BiFunction<BlockPos, BlockState, BlockEntity> brewingCauldronConstructor) {
@@ -25,14 +26,13 @@ public abstract class PlatformSpecificHelper {
         this.brewingCauldronConstructor = brewingCauldronConstructor;
     }
 
-    public BlockEntity createPlatformBrewingCauldronBlockEntity(BlockPos pos, @NotNull BlockState state){
-        return brewingCauldronConstructor.apply(pos,state);
+    public BlockEntity createPlatformBrewingCauldronBlockEntity(BlockPos pos, @NotNull BlockState state) {
+        return brewingCauldronConstructor.apply(pos, state);
     }
 
     public BlockEntityType<? extends BrewingCauldronBlockEntity> getPlatformBrewingCauldron() {
         return brewingCauldron;
     }
-
 
 
 }
